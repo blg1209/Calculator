@@ -1,0 +1,51 @@
+html{
+    text-align: center;
+    font-family: monospace;
+    color: white;
+}
+#container{
+    display: grid;
+    background-color: black;
+    grid-template-rows: minmax(100px, auto) repeat(5, 80px);
+    grid-template-columns: repeat(4, 100px);
+    width: 400px;
+    border-style: solid;
+    border-width: 5px;    
+}
+#display{   
+    background-color: #b2b9b7;
+    height: 80px;
+    color: black;
+    font-size: 50px;    
+    padding: 5px 5px 2px 5px;
+    margin: 5px 5px 2px 5px;
+    font-size: 5.5em;
+     /* Flex end places value at the right */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: space-around;
+    /* makes our column go from beginning to end*/
+    grid-column: 1 / -1;
+}
+button{
+    border-radius: 5%;
+    margin: 1px;
+    border: none;
+    font-weight: initial;
+    font-size: 2em;
+    font-family: monospace;
+    color: black;
+}
+.operand, .decimal{
+    background-color: #217C7E;
+}
+.operator, .equal{
+    background-color: #FF8F1F;
+}
+.clear, .sign, .percent{
+    background-color: dodgerblue;
+}
+#zero{
+    grid-column: 1 / 3;
+}
