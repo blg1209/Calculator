@@ -1,4 +1,5 @@
 let buttons = document.querySelectorAll("button");
+let display = document.getElementById("display")
 let firstNum = "";
 let secondNum = "";
 let operator = "";
@@ -10,12 +11,15 @@ buttons.forEach((button) => {
   button.addEventListener('click', function() {
     if(button.classList.contains('operator')){
         console.log(getOperator(button))
+        console.log(updateDisplay(button))
     }
     if(button.classList.contains('operand')){
         console.log(appendNum(button))
+        console.log(updateDisplay(button))
     }
     if(button.classList.contains('clear')){
-        console.log('Working Clear')
+        console.log(clear())
+        console.log(deleteScreen())
     }
     if(button.classList.contains('sign')){
         console.log('Working Sign')
@@ -27,10 +31,12 @@ buttons.forEach((button) => {
         console.log('Working Decimal')
     }
     if(button.classList.contains('equal')){
-        console.log(compute(firstNum, secondNum, operator))
+        compute(firstNum, secondNum, operator)
+        updateDisplay(button); 
+        
     }  })  })
 
-// gets the value on the button
+// gets the value of the number from event listener above and assigns it
 function appendNum(num){
     if(operator === ""){
     firstNum += num.value;
@@ -41,11 +47,12 @@ function appendNum(num){
         return secondNum;
     }
 }
+// returns the value of the operator, +, -, *, /
 function getOperator(op){
     operator = op.value;
     return operator
     }
-
+// computes the values when 2 numbers and an operator are pressed
 function compute (num1, num2, operator){
     switch(operator){
         case "+":
@@ -60,9 +67,12 @@ function compute (num1, num2, operator){
         case "/":
             total = parseInt(num1) / parseInt(num2);
             return total;
-
+        case "=":
+            num1 = total;
+            num2 = "";
     }
 }
+// When the clear button is clicked it deletes and resets all values
 function clear(){
 firstNum = "";
 secondNum = "";
@@ -72,11 +82,20 @@ displayValue = 0;
 total = null;
 }
 
-function deleteScreen (){}
+function deleteScreen (){
+    return display.innerHTML = "0"
+}
 
 
-
-function updateDisplay(){}
+//display uses getElementByID instead of querySelect. This allows to update
+function updateDisplay(btn){
+    if(btn.value === "="){
+        return display.innerHTML = total;
+    }
+    else{
+        return display.innerHTML = btn.value;
+    }
+}
 
 /*
 Does the same thing as buttons.forEach
