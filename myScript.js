@@ -9,6 +9,7 @@ let total = "";
 
 buttons.forEach((button) => {
   button.addEventListener('click', function() {
+    // if 2nd opertor is entered then sum total, update screen, assign total to first num and clear 2nd operator
     if(button.classList.contains('operator')){
         console.log(getOperator(button));
         if(secondOperator){
@@ -38,7 +39,8 @@ buttons.forEach((button) => {
         console.log('Working Percent')
     }
     if(button.classList.contains('decimal')){
-        console.log('Working Decimal')
+        appendNum(button);
+        updateScreen()
     }
     if(button.classList.contains('equal')){
         compute(firstNum, secondNum, operator)
@@ -73,24 +75,36 @@ function getOperator(op){
     }
 }
 // computes the values when 2 numbers and an operator are pressed
+// +total.toFixed(2) converts the string into an int and then rounds to 2 digits
 function compute (num1, num2, operator){
     switch(operator){
         case "+":
-            total = parseInt(num1) + parseInt(num2);
+            total = parseFloat(num1) + parseFloat(num2);
+            total = +total.toFixed(2);
             displayValue = total;
             return total;
         case "-":
-            total = parseInt(num1) - parseInt(num2);
+            total = parseFloat(num1) - parseFloat(num2);
+            total = +total.toFixed(2);
             displayValue = total;
             return total;
         case "*":
-            total = parseInt(num1) * parseInt(num2);
+            total = parseFloat(num1) * parseFloat(num2);
+            total = +total.toFixed(2);
             displayValue = total;
             return total;
         case "/":
-            total = parseInt(num1) / parseInt(num2);
+            if(secondNum === "0"){
+                console.log('Division by 0')
+                displayValue = "lol 0"
+                break
+            }
+            else{
+            total = parseFloat(num1) / parseFloat(num2);
+            total = +total.toFixed(2);
             displayValue = total;
             return total;
+            }
         case "=":
             num1 = total;
             displayValue = num1;
@@ -110,7 +124,6 @@ secondOperator = "";
 displayValue = 0;
 total = null;
 }
-
 /*
 Does the same thing as buttons.forEach
 for(let i = 0; i < buttons.length; i++) {
