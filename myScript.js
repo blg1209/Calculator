@@ -5,6 +5,7 @@ let secondNum = "";
 let operator = "";
 let secondOperator = "";
 let displayValue = 0;
+let toggleSign = "";
 let total = "";
 
 buttons.forEach((button) => {
@@ -33,7 +34,8 @@ buttons.forEach((button) => {
         updateScreen()
     }
     if(button.classList.contains('sign')){
-        console.log('Working Sign')
+        console.log(plusMinus())
+        updateScreen()
     }
     if(button.classList.contains('percent')){
         console.log('Working Percent')
@@ -109,6 +111,30 @@ function compute (num1, num2, operator){
             num1 = total;
             displayValue = num1;
             num2 = "";
+    }
+}
+function percentage(){
+
+}
+
+// LEFT OFF HERE NEED TO GET A BETTER WAY OF UPDATING THIS
+function plusMinus(){
+    if((operator === "") && (toggleSign !== "-")){
+        toggleSign = "-"
+        firstNum = toggleSign.concat(firstNum)
+        displayValue = firstNum
+    }
+    else if((operator === "") && (toggleSign === "-")){
+        firstNum = firstNum.slice(1);
+        toggleSign = ""
+        displayValue = firstNum
+        console.log(firstNum)
+    }
+    else{
+        secondNum += num.value;
+        // assign num to displayValue which is used to update display
+        displayValue = secondNum;
+        return secondNum;
     }
 }
 function updateScreen(){
