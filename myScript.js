@@ -10,9 +10,9 @@ let total = "";
 
 buttons.forEach((button) => {
   button.addEventListener('click', function() {
-    // if 2nd opertor is entered then sum total, update screen, assign total to first num and clear 2nd operator
     if(button.classList.contains('operator')){
         console.log(getOperator(button));
+        // if 2nd opertor is entered then sum total, update screen, assign total to first num and clear 2nd operator
         if(secondOperator){
             compute(firstNum, secondNum, operator);
             updateScreen()
@@ -30,15 +30,16 @@ buttons.forEach((button) => {
         updateScreen()
     }
     if(button.classList.contains('clear')){
-        console.log(clear())
+        clear()
         updateScreen()
     }
     if(button.classList.contains('sign')){
-        console.log(plusMinus())
+        displayValue = displayValue * -1;
         updateScreen()
     }
     if(button.classList.contains('percent')){
-        console.log('Working Percent')
+        displayValue = displayValue/100;
+        updateScreen()
     }
     if(button.classList.contains('decimal')){
         appendNum(button);
@@ -97,8 +98,7 @@ function compute (num1, num2, operator){
             return total;
         case "/":
             if(secondNum === "0"){
-                console.log('Division by 0')
-                displayValue = "lol 0"
+                displayValue = "l0l"
                 break
             }
             else{
@@ -116,31 +116,9 @@ function compute (num1, num2, operator){
 function percentage(){
 
 }
-
-// LEFT OFF HERE NEED TO GET A BETTER WAY OF UPDATING THIS
-function plusMinus(){
-    if((operator === "") && (toggleSign !== "-")){
-        toggleSign = "-"
-        firstNum = toggleSign.concat(firstNum)
-        displayValue = firstNum
-    }
-    else if((operator === "") && (toggleSign === "-")){
-        firstNum = firstNum.slice(1);
-        toggleSign = ""
-        displayValue = firstNum
-        console.log(firstNum)
-    }
-    else{
-        secondNum += num.value;
-        // assign num to displayValue which is used to update display
-        displayValue = secondNum;
-        return secondNum;
-    }
-}
 function updateScreen(){
-    display.innerHTML = displayValue;
+    display.innerHTML = displayValue.toString().substring(0, 9);
 }
-
 // When the clear button is clicked it deletes and resets all values
 function clear(){
 firstNum = "";
