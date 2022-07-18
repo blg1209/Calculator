@@ -43,7 +43,7 @@ button{
 .operator, .equal{
     background-color: #FF8F1F;
 }
-.clear, .sign, .percent{
+.clear, .del, .percent{
     background-color: dodgerblue;
 }
 #zero{

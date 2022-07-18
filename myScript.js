@@ -8,6 +8,11 @@ let displayValue = 0;
 let toggleSign = "";
 let total = "";
 
+window.addEventListener("keydown", function(e){
+    const key = document.querySelector(`button[data-key='${e.keyCode}']`)
+    key.click()
+})
+
 buttons.forEach((button) => {
   button.addEventListener('click', function() {
     if(button.classList.contains('operator')){
@@ -33,8 +38,8 @@ buttons.forEach((button) => {
         clear()
         updateScreen()
     }
-    if(button.classList.contains('sign')){
-        displayValue = displayValue * -1;
+    if(button.classList.contains('del')){
+        displayValue = displayValue.toString().slice(0,-1)
         updateScreen()
     }
     if(button.classList.contains('percent')){
@@ -113,12 +118,10 @@ function compute (num1, num2, operator){
             num2 = "";
     }
 }
-function percentage(){
-
-}
 function updateScreen(){
     display.innerHTML = displayValue.toString().substring(0, 9);
 }
+
 // When the clear button is clicked it deletes and resets all values
 function clear(){
 firstNum = "";
